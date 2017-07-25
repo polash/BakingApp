@@ -22,9 +22,9 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (isTablet) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        } else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
