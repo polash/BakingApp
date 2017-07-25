@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Baking App</string>
+    <string name="servings">Servings :</string>
+    <string name="no_network">No Network connection.</string>
+</resources>
