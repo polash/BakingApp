@@ -45,6 +45,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.sksanwar.bakingapp.Fragments.RecipeFragment.POSITION;
+
 /**
  * Created by POLASH on 24-Jul-17.
  */
@@ -88,7 +90,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
         if (savedInstanceState != null) {
             stepList = savedInstanceState.getParcelableArrayList(RecipeFragment.RECIPE_LIST);
-            index = savedInstanceState.getInt(RecipeFragment.POSITION);
+            index = savedInstanceState.getInt(POSITION);
         }
 
         return view;
@@ -97,7 +99,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(RecipeFragment.RECIPE_LIST, stepList);
-        outState.putInt(RecipeFragment.POSITION, index);
+        outState.putInt(POSITION, index);
     }
 
     @Override
@@ -106,17 +108,26 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
         if (!isTablet) {
             //getting extra data into StepList list with the position
-            recipeList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
-            index = getActivity().getIntent().getExtras().getInt(RecipeFragment.POSITION);
-        }
-
-        stepList = recipeList.get(index).getSteps();
-
-        step = stepList.get(index);
-
-        if (step != null) {
+            stepList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
+            index = getActivity().getIntent().getExtras().getInt(POSITION);
+            step = stepList.get(index);
             setUpView(step);
+        } else {
+            recipeList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
+            stepList = recipeList.get(index).getSteps();
+            setUpView(stepList);
         }
+    }
+
+    private void setUpView(ArrayList<Step> stepList) {
+        descpView.setText(stepList.get(index).getDescription());
+        shortDesc.setText(stepList.get(index).getShortDescription());
+        //Getting image url
+        String imageUrl = stepList.get(index).getThumbnailURL();
+        setupImageView(imageUrl);
+        //getting video url
+        String videoUrl = stepList.get(index).getVideoURL();
+        setupVideoView(videoUrl);
     }
 
     //Set the views with data

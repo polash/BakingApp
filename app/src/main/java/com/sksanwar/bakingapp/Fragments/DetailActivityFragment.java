@@ -83,7 +83,7 @@ public class DetailActivityFragment extends
     public void onListItemClick(int clickedItemIndex) {
         if (!isTablet) {
             Intent intent = new Intent(getActivity(), StepsDetailsActivity.class);
-            intent.putParcelableArrayListExtra(RecipeFragment.RECIPE_LIST, recipeList);
+            intent.putParcelableArrayListExtra(RecipeFragment.RECIPE_LIST, stepslist);
             intent.putExtra(RecipeFragment.POSITION, clickedItemIndex);
             startActivity(intent);
         } else {

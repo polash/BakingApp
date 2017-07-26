@@ -21,11 +21,11 @@ public class DetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        if (!isTablet) {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//        } else {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//        }
+        if (isTablet) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        } else if (!isTablet) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
 
         if (savedInstanceState == null) {
