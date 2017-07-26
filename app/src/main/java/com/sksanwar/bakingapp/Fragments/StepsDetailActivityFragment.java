@@ -71,7 +71,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     CardView descriptionCard;
     @BindBool(R.bool.is_tablet)
     boolean isTablet;
-    Step steps;
+    Step step;
     private ArrayList<Recipe> recipeList;
     private ArrayList<Step> stepList;
     private int index;
@@ -87,11 +87,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         ButterKnife.bind(this, view);
 
         if (savedInstanceState != null) {
-
             stepList = savedInstanceState.getParcelableArrayList(RecipeFragment.RECIPE_LIST);
             index = savedInstanceState.getInt(RecipeFragment.POSITION);
         }
-
 
         return view;
     }
@@ -106,14 +104,18 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //getting extra data into StepList list with the position
-        stepList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
-        index = getActivity().getIntent().getExtras().getInt(RecipeFragment.POSITION);
+        if (!isTablet) {
+            //getting extra data into StepList list with the position
+            recipeList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
+            index = getActivity().getIntent().getExtras().getInt(RecipeFragment.POSITION);
+        }
 
-        steps = stepList.get(index);
+        stepList = recipeList.get(index).getSteps();
 
-        if (steps != null) {
-            setUpView(steps);
+        step = stepList.get(index);
+
+        if (step != null) {
+            setUpView(step);
         }
     }
 
@@ -141,9 +143,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
             if (!previousBtn.isEnabled()) previousBtn.setEnabled(true);
 
-            steps = stepList.get(index);
+            step = stepList.get(index);
             releasePlayer();
-            setUpView(steps);
+            setUpView(step);
         }
     }
 
@@ -156,9 +158,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
             if (!nextBtn.isEnabled()) nextBtn.setEnabled(true);
 
-            steps = stepList.get(index);
+            step = stepList.get(index);
             releasePlayer();
-            setUpView(steps);
+            setUpView(step);
         }
     }
 
