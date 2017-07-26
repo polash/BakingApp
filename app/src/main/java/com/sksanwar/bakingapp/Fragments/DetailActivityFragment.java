@@ -89,7 +89,7 @@ public class DetailActivityFragment extends
         } else {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             StepsDetailActivityFragment stepsDetailActivityFragment = new StepsDetailActivityFragment();
-            index = clickedItemIndex;
+            stepsDetailActivityFragment.index = clickedItemIndex;
             fragmentManager.beginTransaction()
                     .add(R.id.steps_details_frame, stepsDetailActivityFragment)
                     .commit();

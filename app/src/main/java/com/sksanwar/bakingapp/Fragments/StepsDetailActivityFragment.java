@@ -46,6 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.sksanwar.bakingapp.Fragments.RecipeFragment.POSITION;
+import static com.sksanwar.bakingapp.Fragments.RecipeFragment.RECIPE_LIST;
 
 /**
  * Created by POLASH on 24-Jul-17.
@@ -74,9 +75,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     @BindBool(R.bool.is_tablet)
     boolean isTablet;
     Step step;
+    int index;
     private ArrayList<Recipe> recipeList;
     private ArrayList<Step> stepList;
-    private int index;
     private SimpleExoPlayer exoPlayer;
     private PlaybackStateCompat.Builder stateBuilder;
 
@@ -88,23 +89,28 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         View view = inflater.inflate(R.layout.fragment_steps_detail_activity, container, false);
         ButterKnife.bind(this, view);
 
-        if (savedInstanceState != null) {
-            stepList = savedInstanceState.getParcelableArrayList(RecipeFragment.RECIPE_LIST);
-            index = savedInstanceState.getInt(POSITION);
-        }
-
         return view;
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(RecipeFragment.RECIPE_LIST, stepList);
-        outState.putInt(POSITION, index);
+        super.onSaveInstanceState(outState);
+        if (!isTablet) {
+            outState.putParcelableArrayList(RecipeFragment.RECIPE_LIST, stepList);
+            outState.putInt(POSITION, index);
+        }
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(RECIPE_LIST)) {
+                stepList = savedInstanceState.getParcelableArrayList(RecipeFragment.RECIPE_LIST);
+                index = savedInstanceState.getInt(POSITION);
+            }
+        }
 
         if (!isTablet) {
             //getting extra data into StepList list with the position
@@ -114,6 +120,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
             setUpView(step);
         } else {
             recipeList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
+            int index = getActivity().getIntent().getExtras().getInt(POSITION);
             stepList = recipeList.get(index).getSteps();
             setUpView(stepList);
         }
