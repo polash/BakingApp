@@ -22,16 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activities.DetailActivity"
-            android:parentActivityName=".Activities.MainActivity">
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".Activities.StepsDetailsActivity"
-            android:label="Current Step" />
+            android:label="Current Step"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

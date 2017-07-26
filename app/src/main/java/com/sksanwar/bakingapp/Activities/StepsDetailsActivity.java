@@ -20,7 +20,7 @@ public class StepsDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (isTablet) {
+        if (isTablet && (getSupportActionBar() != null)) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
 
