@@ -92,14 +92,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         return view;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (!isTablet) {
-            outState.putParcelableArrayList(RecipeFragment.RECIPE_LIST, stepList);
-            outState.putInt(POSITION, index);
-        }
-    }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -349,5 +342,14 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     @Override
     public void onPositionDiscontinuity() {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (!isTablet) {
+            outState.putParcelableArrayList(RecipeFragment.RECIPE_LIST, stepList);
+            outState.putInt(POSITION, index);
+        }
     }
 }
