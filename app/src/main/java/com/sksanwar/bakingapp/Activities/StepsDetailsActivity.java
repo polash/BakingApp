@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import com.sksanwar.bakingapp.Fragments.StepsDetailActivityFragment;
 import com.sksanwar.bakingapp.R;
 
+import static com.sksanwar.bakingapp.Activities.MainActivity.isTablet;
+
 public class StepsDetailsActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +19,10 @@ public class StepsDetailsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (isTablet) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
 
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();

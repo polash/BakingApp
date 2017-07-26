@@ -72,6 +72,7 @@ public class RecipeFragment extends Fragment implements AsyncListner,
 
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecipeAdapter(this, bakelist);
+
         recyclerView.setAdapter(adapter);
     }
 
