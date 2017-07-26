@@ -108,7 +108,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         if (!isTablet) {
             //getting extra data into StepList list with the position
             stepList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
-            index = getActivity().getIntent().getExtras().getInt(POSITION);
+            //index = getActivity().getIntent().getExtras().getInt(POSITION);
             step = stepList.get(index);
             setUpView(step);
         } else {
@@ -347,9 +347,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (!isTablet) {
-            outState.putParcelableArrayList(RecipeFragment.RECIPE_LIST, stepList);
-            outState.putInt(POSITION, index);
-        }
+        outState.putParcelableArrayList(RecipeFragment.RECIPE_LIST, stepList);
+        outState.putInt(POSITION, index);
     }
 }
