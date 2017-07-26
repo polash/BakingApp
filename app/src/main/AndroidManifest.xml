@@ -22,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activities.DetailActivity"
             android:parentActivityName=".Activities.MainActivity"
@@ -31,12 +30,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".Activities.StepsDetailsActivity"
             android:label="Current Step"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <receiver android:name=".Widget.BakingWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baking_widget_provider_info" />
+        </receiver>
+
+        <service
+            android:name=".Widget.WidgetStackViewService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>
