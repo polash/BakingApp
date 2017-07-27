@@ -316,6 +316,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
             public void onSkipToPrevious() {
                 exoPlayer.seekTo(0);
             }
+
         });
         mediaSession.setActive(true);
     }
