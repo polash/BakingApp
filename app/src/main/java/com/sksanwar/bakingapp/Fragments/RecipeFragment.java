@@ -6,11 +6,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sksanwar.bakingapp.Activities.DetailActivity;
 import com.sksanwar.bakingapp.Adapters.RecipeAdapter;
@@ -21,19 +23,27 @@ import com.sksanwar.bakingapp.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by sksho on 20-Jul-17.
  */
 
 public class RecipeFragment extends Fragment implements AsyncListner,
-        RecipeAdapter.ListItemClickListener {
-
+        RecipeAdapter.ListItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     public static final String RECIPE_LIST = "recipe_list";
     public static final String POSITION = "position";
     private final static String LOG_TAG = RecipeFragment.class.getSimpleName();
+    @BindView(R.id.rv_recipe)
+    RecyclerView recyclerView;
+    @BindView(R.id.no_network)
+    TextView no_network;
+    @BindView(R.id.swip_to_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<Recipe> recipeList;
-    private RecyclerView recyclerView;
     private RecipeAdapter adapter;
+
 
     public RecipeFragment() {
     }
@@ -41,7 +51,12 @@ public class RecipeFragment extends Fragment implements AsyncListner,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, rootView);
 
+        no_network.setVisibility(View.GONE);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        recipeDownloadfromJson();
         networkCheck();
         return rootView;
     }
@@ -67,12 +82,10 @@ public class RecipeFragment extends Fragment implements AsyncListner,
 
     //Method for loading the Views
     public void loadViews(ArrayList<Recipe> bakelist) {
-        recyclerView = getActivity().findViewById(R.id.rv_recipe);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecipeAdapter(this, bakelist);
-
+        swipeRefreshLayout.setRefreshing(false);
         recyclerView.setAdapter(adapter);
     }
 
@@ -104,6 +117,21 @@ public class RecipeFragment extends Fragment implements AsyncListner,
         intent.putParcelableArrayListExtra(RECIPE_LIST, recipeList);
         intent.putExtra(POSITION, clickedItemIndex);
         startActivity(intent);
+    }
+
+    @Override
+    public void onRefresh() {
+        recipeDownloadfromJson();
+    }
+
+    private void recipeDownloadfromJson() {
+        if (networkCheck()) {
+            swipeRefreshLayout.setRefreshing(true);
+            new RecipeTask(this).execute();
+        } else {
+            no_network.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 }
 

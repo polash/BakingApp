@@ -55,6 +55,7 @@ import static com.sksanwar.bakingapp.Fragments.RecipeFragment.RECIPE_LIST;
 public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.EventListener {
 
 
+
     private static MediaSessionCompat mediaSession;
     @BindView(R.id.recipe_step_video)
     SimpleExoPlayerView playerView;
@@ -74,13 +75,16 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     CardView descriptionCard;
     @BindBool(R.bool.is_tablet)
     boolean isTablet;
-    Step step;
     int index;
+    private Step step;
     private ArrayList<Recipe> recipeList;
     private ArrayList<Step> stepList;
     private SimpleExoPlayer exoPlayer;
     private PlaybackStateCompat.Builder stateBuilder;
 
+    /**
+     * Default Fragment Constructor
+     */
     public StepsDetailActivityFragment() {
     }
 
@@ -91,8 +95,6 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
         return view;
     }
-
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -105,10 +107,13 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
             }
         }
 
+        /**
+         *Checking of tablet mode or phone mode. Based on this UI will be view
+         */
         if (!isTablet) {
             //getting extra data into StepList list with the position
             stepList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
-            //index = getActivity().getIntent().getExtras().getInt(POSITION);
+            index = getActivity().getIntent().getExtras().getInt(POSITION);
             step = stepList.get(index);
             setUpView(step);
         } else {
@@ -119,6 +124,11 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
     }
 
+    /**
+     * UI setup in Tablet mode to avoid casting bug
+     *
+     * @param stepList
+     */
     private void setUpView(ArrayList<Step> stepList) {
         descpView.setText(stepList.get(index).getDescription());
         shortDesc.setText(stepList.get(index).getShortDescription());
@@ -130,7 +140,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         setupVideoView(videoUrl);
     }
 
-    //Set the views with data
+    //Set the views with data for phone mode
     private void setUpView(Step steps) {
         descpView.setText(steps.getDescription());
         shortDesc.setText(steps.getShortDescription());
@@ -145,6 +155,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
     }
 
+    /**
+     * Next Button click event
+     */
     @OnClick(R.id.next_step_btn)
     void doNextStep() {
         if (index == stepList.size() - 1) {
@@ -160,6 +173,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
     }
 
+    /**
+     * Previous Button Click event
+     */
     @OnClick(R.id.previous_step_btn)
     void doPreviousStep() {
         if (index == 0) {
@@ -181,6 +197,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         releasePlayer();
     }
 
+    /**
+     * Exoplayer release method
+     */
     private void releasePlayer() {
         if (exoPlayer != null) {
             exoPlayer.stop();
@@ -193,6 +212,10 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
     }
 
+    /**
+     * setup video view will it be full screen or not
+     * @param videoUrl
+     */
     private void setupVideoView(String videoUrl) {
         if (videoUrl != null && !videoUrl.isEmpty()) {
 
@@ -214,7 +237,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
     }
 
-    // Src: https://developer.android.com/training/system-ui/immersive.html
+    // Tutorial from: https://developer.android.com/training/system-ui/immersive.html
     private void hideSystemUI() {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
@@ -229,11 +252,19 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
+    /**
+     * view expanding method
+     * @param exoPlayer
+     */
     private void expandVideoView(SimpleExoPlayerView exoPlayer) {
         exoPlayer.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
         exoPlayer.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
     }
 
+    /**
+     * initialize exo player
+     * @param mediaUri
+     */
     private void initializePlayer(Uri mediaUri) {
         if (exoPlayer == null) {
 
@@ -251,8 +282,11 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
     }
 
+    /**
+     * Media session initialization
+     */
     private void initializeMediaSession() {
-        mediaSession = new MediaSessionCompat(getContext(), "RecipeStepSinglePageFragment");
+        mediaSession = new MediaSessionCompat(getContext(), "RecipePageFragment");
 
         mediaSession.setFlags(
                 MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
@@ -287,6 +321,10 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     }
 
 
+    /**
+     * Imageview setup for Json with no video url
+     * @param imageUrl
+     */
     private void setupImageView(String imageUrl) {
         if (imageUrl.isEmpty()) {
             Picasso.with(getActivity())
@@ -300,6 +338,12 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
     }
 
+    /**
+     * View visibility method for hiding aall the UI component when
+     * it is in full screen mode
+     * @param view
+     * @param show
+     */
     private void setViewVisibility(View view, boolean show) {
         if (show) {
             view.setVisibility(View.VISIBLE);
