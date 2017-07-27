@@ -214,6 +214,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
     /**
      * setup video view will it be full screen or not
+     *
      * @param videoUrl
      */
     private void setupVideoView(String videoUrl) {
@@ -254,6 +255,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
     /**
      * view expanding method
+     *
      * @param exoPlayer
      */
     private void expandVideoView(SimpleExoPlayerView exoPlayer) {
@@ -263,6 +265,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
     /**
      * initialize exo player
+     *
      * @param mediaUri
      */
     private void initializePlayer(Uri mediaUri) {
@@ -324,6 +327,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
     /**
      * Imageview setup for Json with no video url
+     *
      * @param imageUrl
      */
     private void setupImageView(String imageUrl) {
@@ -342,6 +346,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     /**
      * View visibility method for hiding aall the UI component when
      * it is in full screen mode
+     *
      * @param view
      * @param show
      */

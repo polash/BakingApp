@@ -75,7 +75,6 @@ public class DetailActivityFragment extends
         StepsAdapter stepsAdapter = new StepsAdapter(this, stepslist);
         stepsRecyclerView.setAdapter(stepsAdapter);
 
-
         return rootView;
     }
 

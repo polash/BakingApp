@@ -34,17 +34,19 @@ public class RecipeFragment extends Fragment implements AsyncListner,
         RecipeAdapter.ListItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     public static final String RECIPE_LIST = "recipe_list";
     public static final String POSITION = "position";
-    private final static String LOG_TAG = RecipeFragment.class.getSimpleName();
+
     @BindView(R.id.rv_recipe)
     RecyclerView recyclerView;
     @BindView(R.id.no_network)
     TextView no_network;
     @BindView(R.id.swip_to_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
+
     private ArrayList<Recipe> recipeList;
     private RecipeAdapter adapter;
 
 
+    //Default Fragment Constructor
     public RecipeFragment() {
     }
 
@@ -81,15 +83,15 @@ public class RecipeFragment extends Fragment implements AsyncListner,
     }
 
     //Method for loading the Views
-    public void loadViews(ArrayList<Recipe> bakelist) {
+    public void loadViews(ArrayList<Recipe> recipeArrayList) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecipeAdapter(this, bakelist);
+        adapter = new RecipeAdapter(this, recipeArrayList);
         swipeRefreshLayout.setRefreshing(false);
         recyclerView.setAdapter(adapter);
     }
 
-    //Network Cheks
+    //Network Checks
     private boolean networkCheck() {
         ConnectivityManager cm =
                 (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -97,7 +99,7 @@ public class RecipeFragment extends Fragment implements AsyncListner,
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 
-    //Getting recipiList from the RecipeTask
+    //Getting recipeList from the RecipeTask
     @Override
     public void returnRecipeList(ArrayList<Recipe> recipes) {
         recipeList = recipes;

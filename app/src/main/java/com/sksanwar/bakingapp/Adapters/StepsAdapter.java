@@ -12,6 +12,9 @@ import com.sksanwar.bakingapp.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by sksho on 22-Jul-17.
  */
@@ -59,14 +62,15 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
     class StepViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
+        @BindView(R.id.list_step_description)
         TextView short_description;
+        @BindView(R.id.list_step_id)
         TextView steps_id;
 
         //Constructor
         public StepViewHolder(View itemView) {
             super(itemView);
-            steps_id = itemView.findViewById(R.id.list_step_id);
-            short_description = itemView.findViewById(R.id.list_step_description);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 

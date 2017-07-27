@@ -2,7 +2,6 @@ package com.sksanwar.bakingapp.FetchRecipeTask;
 
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.sksanwar.bakingapp.Pojo.Ingredients;
 import com.sksanwar.bakingapp.Pojo.Recipe;
@@ -21,13 +20,15 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import timber.log.Timber;
+
+import static timber.log.Timber.d;
+
 /**
  * A class that checks the connection with HTTP and parse the Json in Proper way
  */
 
 public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
-
-    private static final String LOG_TAG = RecipeTask.class.getSimpleName();
 
     ArrayList<Recipe> recipeArrayList = new ArrayList<>();
     private AsyncListner listner;
@@ -55,7 +56,7 @@ public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
         return output.toString();
     }
 
-    //getiing data from json mehod
+    //getiing data from json method
     private ArrayList<Recipe> getRecipeDataFromJson(String baking)
             throws JSONException {
 
@@ -86,7 +87,7 @@ public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
             String recipeName = recipeJsonObject.getString(RECIPE_NAME);
             Integer recipeServings = recipeJsonObject.getInt(String.valueOf(RECIPE_SERVINGS));
             String recipeImage = recipeJsonObject.getString(RECIPE_IMAGE);
-            //Log.v(LOG_TAG, recipeId +" "+ recipeName +" "+ recipeServings +" "+ recipeImage);
+            d(recipeId + " " + recipeName + " " + recipeServings + " " + recipeImage);
 
             //List Creation
             ArrayList<Ingredients> ingredientList = new ArrayList<>();
@@ -102,7 +103,7 @@ public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
                 String ingredientQuantity = ingredientsObjects.getString(INGREDIENTS_QUANTIFY);
                 String ingredientMeasure = ingredientsObjects.getString(INGREDIENTS_MEASURE);
                 String ingredientIngredients = ingredientsObjects.getString(INGREDIENTS_INGREDIENT);
-                //Log.v(LOG_TAG, ingredientQuantity+" "+ingredientMeasure+" "+ingredientIngredients);
+                d(ingredientQuantity + " " + ingredientMeasure + " " + ingredientIngredients);
 
                 //Creating Ingredients Object
                 Ingredients ingredients = new Ingredients(ingredientQuantity, ingredientMeasure, ingredientIngredients);
@@ -122,7 +123,7 @@ public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
                 String stepsDescrp = stepObject.getString(STEPS_DESCRP);
                 String stepsVpath = stepObject.getString(STEPS_VIDEO_PATH);
                 String stepsThumnail = stepObject.getString(STEPS_THUMBNAIL);
-                //Log.v(LOG_TAG, stepsId+" "+stepsDescrp+" "+stepsSdescrp+" "+stepsVpath+" "+stepsThumnail);
+                d(stepsId + " " + stepsDescrp + " " + stepsSdescrp + " " + stepsVpath + " " + stepsThumnail);
 
                 //Creating Step Object
                 Step stepsObj = new Step(stepsId, stepsSdescrp, stepsDescrp, stepsVpath, stepsThumnail);
@@ -155,7 +156,7 @@ public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
 
             //Creating URL
             URL url = new URL(builtUri.toString());
-            Log.v(LOG_TAG, "Url Created : " + url.toString());
+            Timber.d("Url Created : " + url.toString());
 
             // Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -168,7 +169,7 @@ public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
                 inputStream = urlConnection.getInputStream();
                 recipeJsonString = readFromStream(inputStream);
             } else {
-                Log.d(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+                Timber.d("Error response code: " + urlConnection.getResponseCode());
             }
 
         } catch (IOException e) {
@@ -183,7 +184,7 @@ public class RecipeTask extends AsyncTask<Void, Void, ArrayList<Recipe>> {
                 try {
                     inputStream.close();
                 } catch (final IOException e) {
-                    Log.d(LOG_TAG, "Error closing inputStream", e);
+                    Timber.d("Error closing inputStream", e);
                 }
             }
         }
