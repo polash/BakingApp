@@ -25,18 +25,18 @@
 
         <FrameLayout
             android:id="@+id/detail_activity_layout"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <View
-            android:layout_width="1dp"
+            android:layout_width="@dimen/one_dp"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark" />
 
         <FrameLayout
             android:id="@+id/steps_details_frame"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 

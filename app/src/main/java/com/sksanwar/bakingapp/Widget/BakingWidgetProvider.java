@@ -26,6 +26,7 @@ public class BakingWidgetProvider extends AppWidgetProvider {
         views.setRemoteAdapter(R.id.widget_stack_view, intent);
 
         Intent viewIntent = new Intent(context, MainActivity.class);
+        //viewIntent.setAction(WidgetStackViewService)
         PendingIntent viewPendingIntent = PendingIntent.getActivity(context, 0, viewIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_stack_view, viewPendingIntent);
 

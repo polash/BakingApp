@@ -4,9 +4,9 @@
     android:id="@+id/recipe_widget_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#334"
+    android:background="@color/color_b_black"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/sixteen_dp">
 
     <TextView
         android:id="@+id/widget_item_recipe_name"
@@ -14,12 +14,12 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        tools:text="Recipe Name" />
+        tools:text="@string/widget_title" />
 
     <TextView
         android:id="@+id/widget_item_ingredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        tools:text="Recipe Ingredients" />
+        tools:text="@string/widget_list" />
 </LinearLayout>

@@ -22,6 +22,8 @@ public class StepsDetailsActivity extends AppCompatActivity {
 
         if (isTablet && (getSupportActionBar() != null)) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        } else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         if (savedInstanceState == null) {

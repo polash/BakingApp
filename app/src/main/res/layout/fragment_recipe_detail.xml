@@ -7,22 +7,22 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ingredient_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="4dp"
+        android:layout_height="@dimen/zero_dp"
+        android:layout_margin="@dimen/four_dp"
         android:layout_weight="1" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/three_dp"
+        android:layout_marginBottom="@dimen/eight_dp"
+        android:layout_marginTop="@dimen/eight_dp"
         android:background="@color/colorPrimaryDark" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipe_details_steps"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="4dp"
+        android:layout_height="@dimen/zero_dp"
+        android:layout_margin="@dimen/four_dp"
         android:layout_weight="2" />
 
 </LinearLayout>
