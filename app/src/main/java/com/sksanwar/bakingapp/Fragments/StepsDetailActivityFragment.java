@@ -54,8 +54,6 @@ import static com.sksanwar.bakingapp.Fragments.RecipeFragment.RECIPE_LIST;
 
 public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.EventListener {
 
-
-
     private static MediaSessionCompat mediaSession;
     @BindView(R.id.recipe_step_video)
     SimpleExoPlayerView playerView;
@@ -113,7 +111,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         if (!isTablet) {
             //getting extra data into StepList list with the position
             stepList = getActivity().getIntent().getParcelableArrayListExtra(RecipeFragment.RECIPE_LIST);
-            index = getActivity().getIntent().getExtras().getInt(POSITION);
+            if (savedInstanceState == null) {
+                index = getActivity().getIntent().getExtras().getInt(POSITION);
+            }
             step = stepList.get(index);
             setUpView(step);
         } else {
