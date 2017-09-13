@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * RecipeAdapter
+ * Adapter for Recipe
  */
 
 public class RecipeAdapter extends

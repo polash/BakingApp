@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 import static com.sksanwar.bakingapp.Activities.MainActivity.isTablet;
 
 /**
- * Created by sksho on 22-Jul-17.
+ * Detail Activity Fragment class
  */
 
 public class DetailActivityFragment extends

@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by sksho on 23-Jul-17.
+ * Adapter for Ingredient
  */
 
 public class IngredientAdapter extends

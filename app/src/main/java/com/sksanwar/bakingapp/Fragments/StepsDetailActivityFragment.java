@@ -49,7 +49,7 @@ import static com.sksanwar.bakingapp.Fragments.RecipeFragment.POSITION;
 import static com.sksanwar.bakingapp.Fragments.RecipeFragment.RECIPE_LIST;
 
 /**
- * Created by POLASH on 24-Jul-17.
+ * Steps Detail Activity Fragment class
  */
 
 public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.EventListener {

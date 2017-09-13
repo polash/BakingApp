@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by sksho on 20-Jul-17.
+ * Recipe Fragment class
  */
 
 public class RecipeFragment extends Fragment implements AsyncListner,

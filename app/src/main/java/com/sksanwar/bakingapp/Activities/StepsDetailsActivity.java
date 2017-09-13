@@ -10,6 +10,9 @@ import com.sksanwar.bakingapp.R;
 
 import static com.sksanwar.bakingapp.Activities.MainActivity.isTablet;
 
+/**
+ * Step detail activity
+ */
 public class StepsDetailsActivity extends AppCompatActivity {
 
     @Override

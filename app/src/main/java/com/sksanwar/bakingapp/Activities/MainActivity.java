@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.sksanwar.bakingapp.Fragments.RecipeFragment;
 import com.sksanwar.bakingapp.R;
 
+/**
+ * Main Activity
+ */
 public class MainActivity extends AppCompatActivity {
     public static boolean isTablet = false;
 
