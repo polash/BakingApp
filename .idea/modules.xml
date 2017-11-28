@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BakingApp.iml" filepath="$PROJECT_DIR$/BakingApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BakingApp.iml" filepath="$PROJECT_DIR$/.idea/BakingApp.iml" />
+      <module fileurl="file://J:\Android Studio Projects\BakingApp\BakingApp.iml" filepath="J:\Android Studio Projects\BakingApp\BakingApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://J:\Android Studio Projects\BakingApp\app\app.iml" filepath="J:\Android Studio Projects\BakingApp\app\app.iml" />
     </modules>
   </component>
 </project>
